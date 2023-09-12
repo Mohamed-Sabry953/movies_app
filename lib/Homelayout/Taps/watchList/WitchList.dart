@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/Homelayout/Taps/Home/watchList/WatchListContent.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
+
+import 'WatchListContent.dart';
 
 class WatchList extends StatefulWidget {
    WatchList ({super.key});

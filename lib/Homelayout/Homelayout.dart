@@ -6,7 +6,7 @@ import '../../themes/ThemeData.dart';
 import 'Taps/BrowserTap/browserTap.dart';
 import 'Taps/Home/HomeTap.dart';
 import 'Taps/SearchTap.dart';
-import 'Taps/Home/watchList/WitchList.dart';
+import 'Taps/watchList/WitchList.dart';
 
 class Homelayout extends StatefulWidget {
   static const String routeName = 'home';
