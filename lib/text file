@@ -1,0 +1,29 @@
+child: Stack(
+                                            children: [
+                                              Image.network(
+                                                "${Constant.Image}${SearchMovies[index].posterPath ?? SearchMovies[0].posterPath}",
+                                                filterQuality:
+                                                    FilterQuality.high,
+                                              ),
+                                              Container(
+                                                width: 40,
+                                                height: 40,
+                                                child: Stack(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.bookmark_outlined,
+                                                      color: Color(0xff514F4F),
+                                                      size: 40,
+                                                      weight: .5,
+                                                    ),
+                                                    Center(
+                                                        child: Icon(
+                                                      Icons.add,
+                                                      color: Colors.white,
+                                                      size: 15,
+                                                    )),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
