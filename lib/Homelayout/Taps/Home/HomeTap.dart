@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/Homelayout/Taps/Home/widgets/NewPlayingMovieList.dart';
 import 'package:movies_app/Homelayout/Taps/Home/widgets/PoplurMoviesList.dart';
+import 'package:movies_app/Homelayout/Taps/Home/widgets/NowPlayingMoviesList.dart';
 import 'package:movies_app/Homelayout/Taps/Home/widgets/TopRatedMoviesList.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +18,8 @@ class _HomeTapState extends State<HomeTap> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        NewPlayingMoviesList(),
         PoplurMoviesList(),
+        NowPlayingMoviesList(),
         TopRatedMoviesList(),
         SizedBox(
           height: 5,
