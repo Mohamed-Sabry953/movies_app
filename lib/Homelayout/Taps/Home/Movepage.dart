@@ -32,7 +32,7 @@ class Movepage extends StatelessWidget {
               Image(
                 image: NetworkImage("${Constant.Image}${args.image}"),
                 fit: BoxFit.fill,
-                height: 200,
+                height: 175,
                 width: double.infinity,
               ),
               Container(
@@ -207,7 +207,7 @@ class Movepage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                     ],
                   ),

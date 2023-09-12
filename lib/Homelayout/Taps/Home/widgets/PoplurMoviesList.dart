@@ -24,8 +24,13 @@ class PoplurMoviesList extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 5,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Divider(
+                color: Colors.white,
+                thickness: 2,
+                height: 3,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -121,6 +126,14 @@ class PoplurMoviesList extends StatelessWidget {
                     enlargeCenterPage: true,
                     autoPlayAnimationDuration: Duration(milliseconds: 100),
                     autoPlayInterval: Duration(seconds: 9)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Divider(
+                color: Colors.white,
+                thickness: 2,
+                height: 3,
               ),
             ),
           ],

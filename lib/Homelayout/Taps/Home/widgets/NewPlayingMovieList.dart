@@ -45,19 +45,19 @@ class NewPlayingMoviesList extends StatelessWidget {
                   padding: EdgeInsetsDirectional.all(5),
                   alignment: Alignment.center,
                   width: double.infinity,
-                  height: 260,
+                  height: 250,
                   child: Stack(children: [
                     Image.network(
                       '${Constant.Image}${PoplurMovies[index].posterPath}',
                       fit: BoxFit.fill,
                       width: double.infinity,
-                      height: 180,
+                      height: 150,
                       filterQuality: FilterQuality.high,
                     ),
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 70, left: 10),
+                          padding: const EdgeInsets.only(top: 50, left: 10),
                           child: Container(
                             decoration: BoxDecoration(color: Colors.grey),
                             child: Stack(
@@ -169,7 +169,7 @@ class NewPlayingMoviesList extends StatelessWidget {
             options: CarouselOptions(
               autoPlayInterval: Duration(seconds: 9),
               viewportFraction: 1,
-              height: 250,
+              height: 220,
               autoPlay: true,
               autoPlayAnimationDuration: Duration(milliseconds: 100),
             ),
