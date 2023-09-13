@@ -8,14 +8,14 @@ import 'Taps/Home/HomeTap.dart';
 import 'Taps/SearchTap.dart';
 import 'Taps/watchList/WitchList.dart';
 
-class Homelayout extends StatefulWidget {
+class MovieHomelayout extends StatefulWidget {
   static const String routeName = 'home';
 
   @override
-  State<Homelayout> createState() => _HomelayoutState();
+  State<MovieHomelayout> createState() => _MovieHomelayoutState();
 }
 
-class _HomelayoutState extends State<Homelayout> {
+class _MovieHomelayoutState extends State<MovieHomelayout> {
   int currentIndex=0;
   List<Widget>Taps=[HomeTap(),SearchTap(),BrowserTap(),WatchList()];
 

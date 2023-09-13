@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/Models/MoviePageModel.dart';
-import 'package:movies_app/Models/HomeScreenModels/Top_rate_movies_model.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
 

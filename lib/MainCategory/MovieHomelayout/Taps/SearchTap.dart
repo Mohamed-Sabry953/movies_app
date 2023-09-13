@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 import 'package:provider/provider.dart';
-
-import '../../../Models/MoviePageModel.dart';
 import '../../../Shared/Constant/constant.dart';
 import '../../../Shared/Network/remote/API_Manger.dart';
 import '../../../provider/Myprovider.dart';
@@ -67,7 +66,7 @@ class _SearchTapState extends State<SearchTap> {
             ),
           ),
           FutureBuilder(
-            future: API_Manager.Search(provider.parm??""),
+            future: API_Manager.SearchMovie(provider.parm??""),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());

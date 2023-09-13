@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Homelayout.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Taps/BrowserTap/MovieByCategory.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Taps/Home/Movepage.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Taps/LoginPage.dart';
+import 'package:movies_app/MainCategory/SeriesHomeLayout/Homelayout.dart';
+import 'package:movies_app/MainCategory/SeriesHomeLayout/Taps/BrowserTap/MovieByCategory.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
-
-import 'Homelayout/Homelayout.dart';
-import 'Homelayout/Taps/BrowserTap/MovieByCategory.dart';
-import 'Homelayout/Taps/Home/Movepage.dart';
-import 'Homelayout/Taps/LoginPage.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -27,12 +28,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        Homelayout.routeName:(context)=>Homelayout(),
+        MovieHomelayout.routeName:(context)=>MovieHomelayout(),
         Movepage.routeName:(context)=>Movepage(),
         MovieCategory.routeName:(context)=>MovieCategory(),
         LoginPage.routeName:(context)=>LoginPage(),
+        SeriesHomelayout.routeName:(context)=>SeriesHomelayout(),
+        SeriesCategory.routeName:(context)=>SeriesCategory(),
       },
-      initialRoute:Homelayout.routeName ,
+      initialRoute:SeriesHomelayout.routeName ,
       themeMode: ThemeMode.light,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),

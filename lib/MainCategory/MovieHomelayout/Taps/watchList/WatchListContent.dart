@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/Homelayout/Taps/Home/Movepage.dart';
-import 'package:movies_app/Models/MoviePageModel.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Taps/Home/Movepage.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 

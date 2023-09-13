@@ -3,13 +3,17 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:movies_app/Models/CategoryScreenModels/CategoryModel.dart';
-import 'package:movies_app/Models/CategoryScreenModels/CatgoryMovieModel.dart';
-import 'package:movies_app/Models/HomeScreenModels/Now_playing_movies.dart';
-import 'package:movies_app/Models/HomeScreenModels/PoplurMovies.dart';
-import 'package:movies_app/Models/SamularMovieModel/SamularMovieModel.dart';
-import 'package:movies_app/Models/SearchScreenModel/SearchModel.dart';
-import 'package:movies_app/Models/HomeScreenModels/Top_rate_movies_model.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/CategoryScreenModels/CategoryModel.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/CategoryScreenModels/CatgoryMovieModel.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/HomeScreenModels/Now_playing_movies.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/HomeScreenModels/PoplurMovies.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/HomeScreenModels/Top_rate_movies_model.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/SamularMovieModel/SamularMovieModel.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/SearchScreenModel/SearchModel.dart';
+import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/CategoryScreenModels/CategoryModel2.dart';
+import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/HomeScreenModels/PoplurSeriesModel.dart';
+import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/HomeScreenModels/TopRatedSeriesModel.dart';
+import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/SearchScreenModel/SearchSeriesModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 class API_Manager{
   static Future<TopRateMoviesModel>TopRatedMoive()async{
@@ -48,7 +52,7 @@ class API_Manager{
       SamularMovieModel samularMovieModel=SamularMovieModel.fromJson(jsondata);
     return samularMovieModel;
   }
-  static Future<SearchModel>Search(String q)async{
+  static Future<SearchModel>SearchMovie(String q)async{
     Uri url=Uri.https("api.themoviedb.org","/3/search/movie",{
       "api_key":Constant.API_KEY,"query":q
     });
@@ -74,5 +78,50 @@ class API_Manager{
     var jsondata=jsonDecode(response.body);
       CatgoryMovieModel catgoryMovieModel=CatgoryMovieModel.fromJson(jsondata);
     return catgoryMovieModel;
+  }
+  static Future<TopRatedSeriesModel>TopRatedSeries()async{
+    Uri url=Uri.https("api.themoviedb.org","/3/tv/top_rated",{
+      "api_key":Constant.API_KEY
+    });
+    var response=await http.get(url);
+    var jsondata=jsonDecode(response.body);
+    TopRatedSeriesModel topRatedSeriesModel=TopRatedSeriesModel.fromJson(jsondata);
+    return topRatedSeriesModel;
+  }
+  static Future<SearchSeriesModel>PoplurSeries()async{
+    Uri url=Uri.https("api.themoviedb.org","/3/search/tv",{
+      "api_key":Constant.API_KEY,"query":"s"
+    });
+    var response=await http.get(url);
+    var jsondata=jsonDecode(response.body);
+    SearchSeriesModel popularSeriesModel=SearchSeriesModel.fromJson(jsondata);
+    return popularSeriesModel;
+  }
+  static Future<CategoryModel2>Category2()async{
+    Uri url=Uri.https("api.themoviedb.org","/3/genre/tv/list",{
+      "api_key":Constant.API_KEY
+    });
+    var response=await http.get(url);
+    var jsondata=jsonDecode(response.body);
+    CategoryModel2 categoryModel2=CategoryModel2.fromJson(jsondata);
+    return categoryModel2;
+  }
+  static Future<CatgoryMovieModel>CategorySeries()async{
+    Uri url=Uri.https("api.themoviedb.org","/3/discover/tv",{
+      "api_key":Constant.API_KEY
+    });
+    var response=await http.get(url);
+    var jsondata=jsonDecode(response.body);
+    CatgoryMovieModel catgoryMovieModel=CatgoryMovieModel.fromJson(jsondata);
+    return catgoryMovieModel;
+  }
+  static Future<SearchSeriesModel>SearchSeries(String q)async{
+    Uri url=Uri.https("api.themoviedb.org","/3/search/tv",{
+      "api_key":Constant.API_KEY,"query":q
+    });
+    var response=await http.get(url);
+    var jsondata=jsonDecode(response.body);
+    SearchSeriesModel searchModel=SearchSeriesModel.fromJson(jsondata);
+    return searchModel;
   }
 }

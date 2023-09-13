@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:movies_app/Models/MoviePageModel.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 
 class FirebaseFunction {
   static CollectionReference<MoviePageModel>getMovieCollection() {
