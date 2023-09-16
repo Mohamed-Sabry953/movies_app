@@ -43,17 +43,4 @@ class MoviePageModel{
       "firebaseId":firebaseId
     };
   }
-
-  static MoviePageModel movie = MoviePageModel(
-      firebaseId: '',
-      name: "",
-      date:'',
-      votecount:
-      0,
-      rate:
-      0,
-      image:'',
-      des: "",
-      id: 0,
-      fov: false);
 }
