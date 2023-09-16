@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:movies_app/MainCategory/CategoryHome.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,15 +23,46 @@ class _SeriesHomelayoutState extends State<SeriesHomelayout> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
     var provider=Provider.of<MyProvider>(context);
     return SafeArea(
       child: Scaffold(
 
         drawer: Drawer(
           width: 240,
+          child: Column(
+            children: [
+              Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assests/images/bg.jpg'),
+                          fit: BoxFit.fill))),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamedAndRemoveUntil(context, CategoryHome.routeName, (route) => false);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.home,size: 28,),
+                      SizedBox(width: 3,),
+                      Text('Category',style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500
+                      ),),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
         backgroundColor: Colors.black,
-        body: Taps[currentIndex],
+        body: Container(
+            decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),child: Taps[currentIndex]),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Color(0xff1A1A1A),

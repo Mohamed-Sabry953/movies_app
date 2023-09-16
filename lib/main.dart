@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/MainCategory/CategoryHome.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Homelayout.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Taps/BrowserTap/MovieByCategory.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Taps/Home/Movepage.dart';
@@ -34,8 +35,9 @@ class MyApp extends StatelessWidget {
         LoginPage.routeName:(context)=>LoginPage(),
         SeriesHomelayout.routeName:(context)=>SeriesHomelayout(),
         SeriesCategory.routeName:(context)=>SeriesCategory(),
+        CategoryHome.routeName:(context)=>CategoryHome(),
       },
-      initialRoute:SeriesHomelayout.routeName ,
+      initialRoute:CategoryHome.routeName ,
       themeMode: ThemeMode.light,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),

@@ -131,7 +131,7 @@ class PoplurMoviesList extends StatelessWidget {
                                   height: 5,
                                 ),
                                 Text(
-                                  "${PoplurMovies[index].id}",
+                                  "${PoplurMovies[index].releaseDate}",
                                   style: TextStyle(color: Colors.white70),
                                 ),
                               ],
