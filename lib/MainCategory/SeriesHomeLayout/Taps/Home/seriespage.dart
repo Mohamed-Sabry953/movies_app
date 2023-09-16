@@ -307,39 +307,6 @@ class Movepage extends StatelessWidget {
                                               width: 110,
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 3.0, top: 4),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                // Icon(
-                                                //   Icons.star,
-                                                //   color: Color(0xffFFBB3B),
-                                                //   size: 15,
-                                                // ),
-                                                // SizedBox(
-                                                //   width: 3,
-                                                // ),
-                                                // Text(
-                                                //   "${TopRateMove[index].voteAverage}",
-                                                //   style: TextStyle(
-                                                //       color: Colors.white,
-                                                //       fontWeight: FontWeight.w500),
-                                                // ),
-                                                // SizedBox(
-                                                //   width: 3,
-                                                // ),
-                                                // Text(
-                                                //   " (${TopRateMove[index].voteCount})",
-                                                //   style: TextStyle(
-                                                //       color: Colors.grey,
-                                                //       fontWeight: FontWeight.w300),
-                                                // ),
-                                              ],
-                                            ),
-                                          ),
                                           SizedBox(
                                             height: 3,
                                           ),
