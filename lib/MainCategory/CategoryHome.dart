@@ -15,6 +15,7 @@ class CategoryHome extends StatelessWidget {
     ]);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(image: AssetImage("assests/images/bg.jpg"),fit: BoxFit.fill,)
