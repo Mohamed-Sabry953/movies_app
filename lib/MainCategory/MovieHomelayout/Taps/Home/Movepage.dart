@@ -5,9 +5,7 @@ import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
 
 class Movepage extends StatelessWidget {
   static const String routeName = 'MovePage';
-
   const Movepage({super.key});
-
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as MoviePageModel;

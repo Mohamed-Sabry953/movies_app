@@ -1,0 +1,13 @@
+{
+  "movies": "Movies",
+  "series": "Series",
+  "sports": "Sports",
+  "nowplaying": "Now playing",
+  "toprate": "Top rate",
+  "adventure": "Adventure",
+  "funny": "Funny",
+  "morelikethis": "More like this",
+  "search": "Search",
+    "nomoviesfound": "No movies found",
+    "nomoviesadd": "No movies add"
+}

@@ -1,0 +1,13 @@
+{
+  "movies": "أفلام",
+  "series": "مسلسلات",
+  "sports": "رياضة",
+  "nowplaying": "تعرض الأن",
+  "toprate": "الأعلى تقيم",
+  "adventure": "مغامرة",
+  "funny": "مرح",
+  "morelikethis": "الكثير مثل ذللك",
+  "search": "بحث",
+    "nomoviesfound": "لم يوجد افلام",
+    "nomoviesadd": "لم تضاف أفلام"
+}

@@ -63,7 +63,7 @@ class API_Manager{
   }
   static Future<CategoryModel>Category()async{
     Uri url=Uri.https("api.themoviedb.org","/3/genre/movie/list",{
-      "api_key":Constant.API_KEY
+      "api_key":Constant.API_KEY,"language":"en"
     });
     var response=await http.get(url);
     var jsondata=jsonDecode(response.body);
