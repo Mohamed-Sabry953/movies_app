@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 
 class Movepage extends StatelessWidget {
   static const String routeName = 'MovePage';
@@ -10,6 +13,7 @@ class Movepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as MoviePageModel;
     return Scaffold(
       backgroundColor: Color(0xff121312),
@@ -23,7 +27,12 @@ class Movepage extends StatelessWidget {
         iconTheme: IconThemeData(size: 35, color: Colors.white),
       ),
       body: Container(
-        decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),
+        decoration: BoxDecoration(
+            image: provider.mode==ThemeMode.light?DecorationImage(
+                image: AssetImage('assests/images/bg.jpg'),
+                fit: BoxFit.fill):DecorationImage(
+                image: AssetImage('assests/images/blackbg.jpg'),
+                fit: BoxFit.fill)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -136,7 +145,7 @@ class Movepage extends StatelessWidget {
                               margin: EdgeInsetsDirectional.only(
                                   start: 15, bottom: 10),
                               child: Text(
-                                'Adverture',
+                                AppLocalizations.of(context)!.adventure,
                                 style:
                                     TextStyle(fontSize: 14, color: Colors.white),
                               ),
@@ -156,7 +165,7 @@ class Movepage extends StatelessWidget {
                               alignment: Alignment.center,
                               margin: EdgeInsetsDirectional.only(bottom: 10),
                               child: Text(
-                                'funny',
+                                AppLocalizations.of(context)!.funny,
                                 style:
                                     TextStyle(fontSize: 14, color: Colors.white),
                               ),
@@ -251,7 +260,7 @@ class Movepage extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 8.0, top: 12, bottom: 12),
                           child: Text(
-                            'More like this',
+                            AppLocalizations.of(context)!.morelikethis,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,

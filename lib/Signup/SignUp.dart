@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:movies_app/Login/LoginPage.dart';
 import 'package:movies_app/MainCategory/CategoryHome.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatelessWidget {
   static const String routeName = 'SignUp';
@@ -14,6 +16,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -21,10 +24,10 @@ class SignUpPage extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  'assests/images/bg.jpg',
-                ),
+            image: provider.mode==ThemeMode.light?DecorationImage(
+                image: AssetImage('assests/images/bg.jpg'),
+                fit: BoxFit.fill):DecorationImage(
+                image: AssetImage('assests/images/blackbg.jpg'),
                 fit: BoxFit.fill)),
         child: SingleChildScrollView(
           child: Padding(

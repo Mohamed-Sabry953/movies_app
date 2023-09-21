@@ -15,6 +15,7 @@ import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/HomeScreenModels
 import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/HomeScreenModels/TopRatedSeriesModel.dart';
 import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/SearchScreenModel/SearchSeriesModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
+import 'package:provider/provider.dart';
 class API_Manager{
   static Future<TopRateMoviesModel>TopRatedMoive()async{
     Uri url=Uri.https("api.themoviedb.org","/3/tv/top_rated",{
@@ -61,9 +62,9 @@ class API_Manager{
       SearchModel searchModel=SearchModel.fromJson(jsondata);
     return searchModel;
   }
-  static Future<CategoryModel>Category()async{
+  static Future<CategoryModel>Category(String lang)async{
     Uri url=Uri.https("api.themoviedb.org","/3/genre/movie/list",{
-      "api_key":Constant.API_KEY,"language":"en"
+      "api_key":Constant.API_KEY,"language":lang
     });
     var response=await http.get(url);
     var jsondata=jsonDecode(response.body);
@@ -97,9 +98,9 @@ class API_Manager{
     SearchSeriesModel popularSeriesModel=SearchSeriesModel.fromJson(jsondata);
     return popularSeriesModel;
   }
-  static Future<CategoryModel2>Category2()async{
+  static Future<CategoryModel2>Category2(String lang)async{
     Uri url=Uri.https("api.themoviedb.org","/3/genre/tv/list",{
-      "api_key":Constant.API_KEY
+      "api_key":Constant.API_KEY,"language":lang
     });
     var response=await http.get(url);
     var jsondata=jsonDecode(response.body);

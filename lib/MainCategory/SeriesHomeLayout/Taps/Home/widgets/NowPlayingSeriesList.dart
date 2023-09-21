@@ -4,7 +4,7 @@ import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.da
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../seriespage.dart';
 
 class NowPlayingSeriesList extends StatelessWidget {
@@ -36,7 +36,7 @@ class NowPlayingSeriesList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Now playing',
+                AppLocalizations.of(context)!.nowplaying,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,

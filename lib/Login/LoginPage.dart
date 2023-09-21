@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movies_app/Signup/SignUp.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 import '../MainCategory/CategoryHome.dart';
 import '../Shared/Network/Firebase/FirebaseFunction.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static const String routeName = 'Login';
 
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   var formkey = GlobalKey<FormState>();
+
   final TextEditingController pass = TextEditingController();
+
   final TextEditingController email = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -22,10 +32,10 @@ class LoginPage extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  'assests/images/bg.jpg',
-                ),
+            image: provider.mode==ThemeMode.light?DecorationImage(
+                image: AssetImage('assests/images/bg.jpg'),
+                fit: BoxFit.fill):DecorationImage(
+                image: AssetImage('assests/images/blackbg.jpg'),
                 fit: BoxFit.fill)),
         child: SingleChildScrollView(
           child: Padding(
@@ -94,8 +104,8 @@ class LoginPage extends StatelessWidget {
                             FirebaseFunction.Login(email.text, pass.text, () {
                               Navigator.pushNamedAndRemoveUntil(context,
                                   CategoryHome.routeName, (route) => false,);
-                            }).catchError((e) {
-                              Text(e.toString());
+                            },).catchError((e) {
+
                             });
                           },
                           child: Text(

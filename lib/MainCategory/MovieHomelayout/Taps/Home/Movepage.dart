@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 
 class Movepage extends StatelessWidget {
   static const String routeName = 'MovePage';
@@ -9,6 +12,7 @@ class Movepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as MoviePageModel;
+    var provider=Provider.of<MyProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xff121312),
       appBar: AppBar(
@@ -16,14 +20,16 @@ class Movepage extends StatelessWidget {
         backgroundColor: Color(0xff1D1E1D),
         title: Text(
           args.name ?? "",
-          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500,color: Colors.white),
         ),
         iconTheme: IconThemeData(size: 35, color: Colors.white),
       ),
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
+            image: provider.mode==ThemeMode.light?DecorationImage(
                 image: AssetImage('assests/images/bg.jpg'),
+                fit: BoxFit.fill):DecorationImage(
+                image: AssetImage('assests/images/blackbg.jpg'),
                 fit: BoxFit.fill)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +40,7 @@ class Movepage extends StatelessWidget {
                 Image(
                   image: NetworkImage("${Constant.Image}${args.image}"),
                   fit: BoxFit.fill,
-                  height: 175,
+                  height: 150,
                   width: double.infinity,
                 ),
                 Container(
@@ -84,7 +90,7 @@ class Movepage extends StatelessWidget {
                 children: [
                   Container(
                     width: 125,
-                    height: 170,
+                    height: 150,
                     decoration: BoxDecoration(color: Colors.grey),
                     child: Stack(
                       children: [
@@ -137,7 +143,7 @@ class Movepage extends StatelessWidget {
                               margin: EdgeInsetsDirectional.only(
                                   start: 15, bottom: 10),
                               child: Text(
-                                'Adverture',
+                                AppLocalizations.of(context)!.adventure,
                                 style:
                                     TextStyle(fontSize: 14, color: Colors.white),
                               ),
@@ -157,7 +163,7 @@ class Movepage extends StatelessWidget {
                               alignment: Alignment.center,
                               margin: EdgeInsetsDirectional.only(bottom: 10),
                               child: Text(
-                                'funny',
+                                AppLocalizations.of(context)!.funny,
                                 style:
                                     TextStyle(fontSize: 14, color: Colors.white),
                               ),
@@ -252,7 +258,7 @@ class Movepage extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 8.0, top: 12, bottom: 12),
                           child: Text(
-                            'More like this',
+                            AppLocalizations.of(context)!.morelikethis,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
@@ -296,40 +302,11 @@ class Movepage extends StatelessWidget {
                                       BoxDecoration(color: Color(0xff1A1A1A)),
                                   child: Stack(
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            child: Image.network(
-                                              "${Constant.Image}${SamelurMovies[index].posterPath ?? SamelurMovies[0].posterPath}",
-                                              filterQuality: FilterQuality.high,
-                                              fit: BoxFit.cover,
-                                              width: 110,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-                                          Text(
-                                            " ${SamelurMovies[index].originalTitle}",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-                                          Text(
-                                            " ${SamelurMovies[index].releaseDate}",
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.w300),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                        ],
+                                      Image.network(
+                                        "${Constant.Image}${SamelurMovies[index].posterPath ?? SamelurMovies[0].posterPath}",
+                                        filterQuality: FilterQuality.high,
+                                        fit: BoxFit.cover,
+                                        width: 110,
                                       ),
                                       Container(
                                         alignment: Alignment.topLeft,

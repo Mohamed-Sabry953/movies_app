@@ -5,6 +5,7 @@ import '../../../Shared/Constant/constant.dart';
 import '../../../Shared/Network/remote/API_Manger.dart';
 import '../../../provider/Myprovider.dart';
 import 'Home/seriespage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SeriesSearchTap extends StatefulWidget {
   const SeriesSearchTap({super.key});
@@ -20,7 +21,12 @@ class _SeriesSearchTapState extends State<SeriesSearchTap> {
     return Scaffold(
       backgroundColor: Color(0xff121312),
       body: Container(
-        decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),
+        decoration: BoxDecoration(
+            image: provider.mode==ThemeMode.light?DecorationImage(
+                image: AssetImage('assests/images/bg.jpg'),
+                fit: BoxFit.fill):DecorationImage(
+                image: AssetImage('assests/images/blackbg.jpg'),
+                fit: BoxFit.fill)),
         child: Column(
           children: [
             Container(
@@ -55,7 +61,7 @@ class _SeriesSearchTapState extends State<SeriesSearchTap> {
                       ),
                       borderRadius: BorderRadius.circular(20)
                   ),
-                  hintText: "Search",
+                  hintText: AppLocalizations.of(context)!.search,
                   hintStyle:TextStyle(
                     color: Colors.white70,
                     fontSize: 18,
@@ -83,7 +89,7 @@ class _SeriesSearchTapState extends State<SeriesSearchTap> {
                     child: Center(child: Column(
                       children: [
                         Image(image: AssetImage('assests/images/movieFound.png')),
-                        Text('No movies found',style: TextStyle(
+                        Text(AppLocalizations.of(context)!.nomoviesfound,style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 25,color: Colors.white
                         ),),

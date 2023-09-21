@@ -5,6 +5,7 @@ import '../../../Shared/Constant/constant.dart';
 import '../../../Shared/Network/remote/API_Manger.dart';
 import '../../../provider/Myprovider.dart';
 import 'Home/Movepage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchTap extends StatefulWidget {
   const SearchTap({super.key});
@@ -21,8 +22,10 @@ class _SearchTapState extends State<SearchTap> {
       backgroundColor: Color(0xff121312),
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
+            image: provider.mode==ThemeMode.light?DecorationImage(
                 image: AssetImage('assests/images/bg.jpg'),
+                fit: BoxFit.fill):DecorationImage(
+                image: AssetImage('assests/images/blackbg.jpg'),
                 fit: BoxFit.fill)),
         child: Column(
           children: [
@@ -58,7 +61,7 @@ class _SearchTapState extends State<SearchTap> {
                       ),
                       borderRadius: BorderRadius.circular(20)
                   ),
-                  hintText: "Search",
+                  hintText: AppLocalizations.of(context)!.search,
                   hintStyle:TextStyle(
                     color: Colors.white70,
                     fontSize: 18,
@@ -86,7 +89,7 @@ class _SearchTapState extends State<SearchTap> {
                     child: Center(child: Column(
                       children: [
                         Image(image: AssetImage('assests/images/movieFound.png')),
-                        Text('No movies found',style: TextStyle(
+                        Text(AppLocalizations.of(context)!.nomoviesfound,style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 25,color: Colors.white
                         ),),

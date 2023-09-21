@@ -7,8 +7,10 @@ import 'package:movies_app/MainCategory/MovieHomelayout/Taps/Home/Movepage.dart'
 import 'package:movies_app/Login/LoginPage.dart';
 import 'package:movies_app/MainCategory/SeriesHomeLayout/Homelayout.dart';
 import 'package:movies_app/MainCategory/SeriesHomeLayout/Taps/BrowserTap/MovieByCategory.dart';
+import 'package:movies_app/MainCategory/Settingpage/SettingPage.dart';
 import 'package:movies_app/Signup/SignUp.dart';
 import 'package:movies_app/provider/Myprovider.dart';
+import 'package:movies_app/themes/ThemeData.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
@@ -41,11 +44,12 @@ class MyApp extends StatelessWidget {
         CategoryHome.routeName:(context)=>CategoryHome(),
         SignUpPage.routeName:(context)=>SignUpPage(),
         LoginPage.routeName:(context)=>LoginPage(),
+        SettingPage.routeName:(context)=>SettingPage(),
       },
       initialRoute:LoginPage.routeName ,
-      themeMode: ThemeMode.light,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      themeMode: provider.mode,
+      theme: MyThemeData.lightmode,
+      darkTheme: MyThemeData.darkmode,
       title: 'Localizations Sample App',
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -53,6 +57,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      locale: Locale(provider.language),
       supportedLocales: [
         Locale('en'), // English
         Locale('ar'), // Spanish

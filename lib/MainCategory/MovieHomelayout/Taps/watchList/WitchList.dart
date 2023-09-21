@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'WatchListContent.dart';
 
@@ -15,12 +16,15 @@ class WatchList extends StatefulWidget {
 class _WatchListState extends State<WatchList> {
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xff121312),
       body: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
+              image: provider.mode==ThemeMode.light?DecorationImage(
                   image: AssetImage('assests/images/bg.jpg'),
+                  fit: BoxFit.fill):DecorationImage(
+                  image: AssetImage('assests/images/blackbg.jpg'),
                   fit: BoxFit.fill)),
         child: Column(
           children: [
@@ -44,7 +48,7 @@ class _WatchListState extends State<WatchList> {
                           children: [
                             Image(image: AssetImage('assests/images/movieFound.png')),
                             Text(
-                              'No movies add',
+                              AppLocalizations.of(context)!.nomoviesadd,
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 25,

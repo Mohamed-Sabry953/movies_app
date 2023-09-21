@@ -3,6 +3,8 @@ import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.da
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 import '../Home/Movepage.dart';
 
 class MovieCategory extends StatelessWidget {
@@ -13,11 +15,13 @@ class MovieCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as MoviePageModel;
+    var provider=Provider.of<MyProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xff121312),
       appBar: AppBar(
          backgroundColor: Color(0xff121312),
         centerTitle: true,
+        toolbarHeight: 80,
         title: Text(args.name??'',style:  TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
@@ -25,7 +29,12 @@ class MovieCategory extends StatelessWidget {
         ),),
       ),
       body: Container(
-          decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),
+          decoration: BoxDecoration(
+              image: provider.mode==ThemeMode.light?DecorationImage(
+                  image: AssetImage('assests/images/bg.jpg'),
+                  fit: BoxFit.fill):DecorationImage(
+                  image: AssetImage('assests/images/blackbg.jpg'),
+                  fit: BoxFit.fill)),
         child: FutureBuilder(
           future: API_Manager.NowPlayingMoive(),
           builder: (context, snapshot) {

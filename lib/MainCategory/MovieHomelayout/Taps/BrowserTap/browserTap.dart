@@ -4,7 +4,6 @@ import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
-
 import 'MovieByCategory.dart';
 
 class BrowserTap extends StatelessWidget {
@@ -47,7 +46,12 @@ class BrowserTap extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff121312),
       body: Container(
-          decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),
+          decoration: BoxDecoration(
+              image: provider.mode==ThemeMode.light?DecorationImage(
+                  image: AssetImage('assests/images/bg.jpg'),
+                  fit: BoxFit.fill):DecorationImage(
+                  image: AssetImage('assests/images/blackbg.jpg'),
+                  fit: BoxFit.fill)),
         child: Column(
           children: [
             Container(
@@ -62,7 +66,7 @@ class BrowserTap extends StatelessWidget {
                       fontSize: 23),
                 )),
             FutureBuilder(
-              future: API_Manager.Category(),
+              future: API_Manager.Category(provider.language),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());

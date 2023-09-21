@@ -47,7 +47,12 @@ class SeriesBrowserTap extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff121312),
       body: Container(
-          decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),
+          decoration: BoxDecoration(
+              image: provider.mode==ThemeMode.light?DecorationImage(
+                  image: AssetImage('assests/images/bg.jpg'),
+                  fit: BoxFit.fill):DecorationImage(
+                  image: AssetImage('assests/images/blackbg.jpg'),
+                  fit: BoxFit.fill)),
         child: Column(
           children: [
             Container(
@@ -62,7 +67,7 @@ class SeriesBrowserTap extends StatelessWidget {
                       fontSize: 23),
                 )),
             FutureBuilder(
-              future: API_Manager.Category2(),
+              future: API_Manager.Category2(provider.language),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());

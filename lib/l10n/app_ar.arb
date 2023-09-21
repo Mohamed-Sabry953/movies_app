@@ -9,5 +9,9 @@
   "morelikethis": "الكثير مثل ذللك",
   "search": "بحث",
     "nomoviesfound": "لم يوجد افلام",
-    "nomoviesadd": "لم تضاف أفلام"
+    "nomoviesadd": "لم تضاف أفلام",
+    "setting": "الاعدادات",
+    "mode": "الوضع",
+    "language": "اللغة",
+    "arabic": "عربى"
 }

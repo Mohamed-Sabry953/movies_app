@@ -9,5 +9,9 @@
   "morelikethis": "More like this",
   "search": "Search",
     "nomoviesfound": "No movies found",
-    "nomoviesadd": "No movies add"
+    "nomoviesadd": "No movies add",
+    "setting": "Setting",
+    "mode": "Mode",
+    "language": "Language",
+    "arabic": "Arabic"
 }

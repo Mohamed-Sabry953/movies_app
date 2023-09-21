@@ -4,7 +4,6 @@ import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.da
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
-
 import '../Movepage.dart';
 
 class PoplurMoviesList extends StatelessWidget {

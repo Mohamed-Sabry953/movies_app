@@ -21,12 +21,12 @@ class MyThemeData{
   ),
       textTheme: TextTheme(
       bodySmall: GoogleFonts.poppins(
-      color: Colors.white,
+      color: Colors.black,
       fontSize: 15,
     fontWeight: FontWeight.w500,
   ),
       bodyMedium: GoogleFonts.poppins(
-      color: Colors.white,
+      color: Colors.black,
       fontSize: 18,
     fontWeight: FontWeight.w600,
   ),

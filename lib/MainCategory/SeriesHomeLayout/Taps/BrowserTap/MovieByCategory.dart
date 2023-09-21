@@ -3,6 +3,8 @@ import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.da
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 import '../Home/seriespage.dart';
 
 class SeriesCategory extends StatelessWidget {
@@ -12,6 +14,7 @@ class SeriesCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as MoviePageModel;
     return Scaffold(
       backgroundColor: Color(0xff121312),
@@ -25,7 +28,12 @@ class SeriesCategory extends StatelessWidget {
         ),),
       ),
       body: Container(
-          decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),
+          decoration: BoxDecoration(
+              image: provider.mode==ThemeMode.light?DecorationImage(
+                  image: AssetImage('assests/images/bg.jpg'),
+                  fit: BoxFit.fill):DecorationImage(
+                  image: AssetImage('assests/images/blackbg.jpg'),
+                  fit: BoxFit.fill)),
         child: FutureBuilder(
           future: API_Manager.PoplurSeries(),
           builder: (context, snapshot) {

@@ -62,7 +62,12 @@ class _SeriesHomelayoutState extends State<SeriesHomelayout> {
         ),
         backgroundColor: Colors.black,
         body: Container(
-            decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assests/images/bg.jpg'),fit: BoxFit.fill)),child: Taps[currentIndex]),
+            decoration: BoxDecoration(
+                image: provider.mode==ThemeMode.light?DecorationImage(
+                    image: AssetImage('assests/images/bg.jpg'),
+                    fit: BoxFit.fill):DecorationImage(
+                    image: AssetImage('assests/images/blackbg.jpg'),
+                    fit: BoxFit.fill)),child: Taps[currentIndex]),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Color(0xff1A1A1A),

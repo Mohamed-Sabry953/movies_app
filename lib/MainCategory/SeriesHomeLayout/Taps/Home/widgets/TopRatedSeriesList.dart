@@ -4,6 +4,7 @@ import 'package:movies_app/MainCategory/MovieHomelayout/Taps/Home/Movepage.dart'
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TopRatedSeriesList extends StatelessWidget {
   const TopRatedSeriesList({super.key});
@@ -29,7 +30,7 @@ class TopRatedSeriesList extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Top rate',
+                    AppLocalizations.of(context)!.toprate,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -68,73 +69,11 @@ class TopRatedSeriesList extends StatelessWidget {
                           BoxDecoration(color: Color(0xff1A1A1A)),
                           child: Stack(
                             children: [
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Image.network(
-                                      "${Constant.Image}${TopRateMove[index].posterPath}",
-                                      filterQuality: FilterQuality.high,
-                                      fit: BoxFit.cover,
-                                      width: 110,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 3.0, top: 4),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.start,
-                                      children: [
-                                        // Icon(
-                                        //   Icons.star,
-                                        //   color: Color(0xffFFBB3B),
-                                        //   size: 15,
-                                        // ),
-                                        // SizedBox(
-                                        //   width: 3,
-                                        // ),
-                                        // Text(
-                                        //   "${TopRateMove[index].voteAverage}",
-                                        //   style: TextStyle(
-                                        //       color: Colors.white,
-                                        //       fontWeight: FontWeight.w500),
-                                        // ),
-                                        // SizedBox(
-                                        //   width: 3,
-                                        // ),
-                                        // Text(
-                                        //   " (${TopRateMove[index].voteCount})",
-                                        //   style: TextStyle(
-                                        //       color: Colors.grey,
-                                        //       fontWeight: FontWeight.w300),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 3,
-                                  ),
-                                  Text(
-                                    " ${TopRateMove[index].name}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  SizedBox(
-                                    height: 3,
-                                  ),
-                                  Text(
-                                    " ${TopRateMove[index].firstAirDate}",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
+                              Image.network(
+                                "${Constant.Image}${TopRateMove[index].posterPath}",
+                                filterQuality: FilterQuality.high,
+                                fit: BoxFit.cover,
+                                width: 110,
                               ),
                               InkWell(
                                 onTap: () {

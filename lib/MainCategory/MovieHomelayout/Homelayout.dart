@@ -64,8 +64,10 @@ class _MovieHomelayoutState extends State<MovieHomelayout> {
         backgroundColor: Colors.black,
         body: Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
+                image: provider.mode==ThemeMode.light?DecorationImage(
                     image: AssetImage('assests/images/bg.jpg'),
+                    fit: BoxFit.fill):DecorationImage(
+                    image: AssetImage('assests/images/blackbg.jpg'),
                     fit: BoxFit.fill)),
             child: Taps[currentIndex]),
         bottomNavigationBar: BottomNavigationBar(

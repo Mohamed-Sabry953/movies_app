@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies_app/Login/LoginPage.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Homelayout.dart';
 import 'package:movies_app/MainCategory/SeriesHomeLayout/Homelayout.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movies_app/MainCategory/Settingpage/SettingPage.dart';
+import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
+import 'package:movies_app/provider/Myprovider.dart';
+import 'package:provider/provider.dart';
 
-class CategoryHome extends StatelessWidget {
+class CategoryHome extends StatefulWidget {
   static const routeName="CategoryHome";
   const CategoryHome({super.key});
 
   @override
+  State<CategoryHome> createState() => _CategoryHomeState();
+}
+
+class _CategoryHomeState extends State<CategoryHome> {
+  @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<MyProvider>(context);
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight
@@ -18,9 +30,13 @@ class CategoryHome extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("assests/images/bg.jpg"),fit: BoxFit.fill,)
-          ),
+              image: provider.mode==ThemeMode.light?DecorationImage(
+                  image: AssetImage('assests/images/bg.jpg'),
+                  fit: BoxFit.fill):DecorationImage(
+                  image: AssetImage('assests/images/blackbg.jpg'),
+                  fit: BoxFit.fill)),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -48,7 +64,7 @@ class CategoryHome extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(context, MovieHomelayout.routeName,(route) => false,arguments: Text('movies'));
                     },
                     child: Container(
-                      height: 220,
+                      height: 200,
                       width: 170,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.white,width: 2,),
@@ -56,7 +72,7 @@ class CategoryHome extends StatelessWidget {
                         image: DecorationImage(image: AssetImage("assests/images/moviesCatgory.png"),fit: BoxFit.cover,)
                       ),
                       child: Center(
-                        child: Text('Movies',style: TextStyle(
+                        child: Text(AppLocalizations.of(context)!.movies,style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -70,7 +86,7 @@ class CategoryHome extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(context, SeriesHomelayout.routeName,(route) => false,arguments: Text('Series'));
                     },
                     child: Container(
-                      height: 220,
+                      height: 200,
                       width: 170,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white,width: 2,),
@@ -78,7 +94,7 @@ class CategoryHome extends StatelessWidget {
                           image: DecorationImage(image: AssetImage("assests/images/seriesCategory.jpg"),fit: BoxFit.fill,)
                       ),
                       child: Center(
-                        child: Text('Series',style: TextStyle(
+                        child: Text(AppLocalizations.of(context)!.series,style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -88,7 +104,7 @@ class CategoryHome extends StatelessWidget {
                   ),
                   SizedBox(width: 20,),
                   Container(
-                    height: 220,
+                    height: 200,
                     width: 170,
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.white,width: 4,),
@@ -96,7 +112,7 @@ class CategoryHome extends StatelessWidget {
                         image: DecorationImage(image: AssetImage("assests/images/sportsCategory.jpg"),fit: BoxFit.fill,)
                     ),
                     child: Center(
-                      child: Text('Sports',style: TextStyle(
+                      child: Text(AppLocalizations.of(context)!.sports,style: TextStyle(
                         color: Colors.white,
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -116,9 +132,13 @@ class CategoryHome extends StatelessWidget {
                         fontWeight: FontWeight.w700)
                     ) ,
                     Spacer(),
-                    Icon(Icons.power_settings_new_outlined,color: Colors.white,size: 30,),
+                    IconButton(onPressed: () {
+                      Logoutdilog();
+                    },icon:Icon(Icons.power_settings_new_outlined,color: Colors.white,size: 30,)),
                     SizedBox(width: 12,),
-                    Icon(Icons.settings_outlined,color: Colors.white,size: 30,),
+                    IconButton(onPressed: () {
+                      Navigator.pushReplacementNamed(context, SettingPage.routeName,);
+                    }, icon:Icon(Icons.settings_outlined,color: Colors.white,size: 30),),
                     SizedBox(width: 12,),
                     Icon(Icons.mic_none_rounded,color: Colors.white,size: 30,),
                     SizedBox(width: 12,),
@@ -134,5 +154,28 @@ class CategoryHome extends StatelessWidget {
         ),
       ),
     );
+  }
+  Logoutdilog(){
+    showModalBottomSheet(backgroundColor: Colors.transparent,context: context, builder: (context) {
+      return Container(
+        height: 170,
+        child: Column(
+          children: [
+            ElevatedButton(onPressed: (){
+              FirebaseFunction.Logout();
+              Navigator.pushNamedAndRemoveUntil(context, LoginPage.routeName, (route) => false);
+            }, child: Center(child: Text('Logout')),style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,fixedSize: Size(double.infinity, 70)
+            )),
+            SizedBox(height: 5,),
+            ElevatedButton(onPressed: (){
+              Navigator.pop(context);
+            }, child: Center(child: Text('Cancel')),style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey,fixedSize: Size(double.infinity, 70)
+            ))
+          ],
+        ),
+      );
+    },);
   }
 }
