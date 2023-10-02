@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movies_app/MainCategory/CategoryHome.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Cubit/MovieCubit.dart';
 import 'package:movies_app/provider/Myprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,15 +13,13 @@ import 'Taps/watchList/WitchList.dart';
 
 class MovieHomelayout extends StatefulWidget {
   static const String routeName = 'home';
-
   @override
   State<MovieHomelayout> createState() => _MovieHomelayoutState();
 }
 
+  List<Widget> Taps = [HomeTap(), SearchTap(), BrowserTap(), WatchList()];
 class _MovieHomelayoutState extends State<MovieHomelayout> {
   int currentIndex = 0;
-  List<Widget> Taps = [HomeTap(), SearchTap(), BrowserTap(), WatchList()];
-
   @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();

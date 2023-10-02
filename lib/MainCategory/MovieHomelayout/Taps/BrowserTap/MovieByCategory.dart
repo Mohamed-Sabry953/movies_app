@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Cubit/MovieCubit.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
@@ -36,7 +37,7 @@ class MovieCategory extends StatelessWidget {
                   image: AssetImage('assests/images/blackbg.jpg'),
                   fit: BoxFit.fill)),
         child: FutureBuilder(
-          future: API_Manager.NowPlayingMoive(),
+          future: API_Manager.PoplurMovie(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Container();
@@ -44,7 +45,7 @@ class MovieCategory extends StatelessWidget {
             if (snapshot.hasError) {
               return Center(child: Text('something went error'));
             }
-            var CategoryMoves = snapshot.data?.results ?? [];
+            var CategoryMoves = [];
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(

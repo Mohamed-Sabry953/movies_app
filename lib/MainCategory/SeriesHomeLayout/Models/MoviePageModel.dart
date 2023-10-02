@@ -1,4 +1,4 @@
-class MoviePageModel{
+class SeriesPageModel{
   String? name;
   String? date;
   String? image;
@@ -9,7 +9,7 @@ class MoviePageModel{
   String firebaseId;
   bool fov=false;
 
-  MoviePageModel(
+  SeriesPageModel(
       {required this.name,
       required this.date,
       required this.votecount,
@@ -19,7 +19,7 @@ class MoviePageModel{
       required this.id,
         required this.firebaseId,
       required this.fov});
-  MoviePageModel.fromjson(Map<String,dynamic>json):this(
+  SeriesPageModel.fromjson(Map<String,dynamic>json):this(
     name:json["name"],
     id:json["id"],
     image:json["image"],
@@ -44,7 +44,7 @@ class MoviePageModel{
     };
   }
 
-  static MoviePageModel movie = MoviePageModel(
+  static SeriesPageModel movie = SeriesPageModel(
       firebaseId: '',
       name: "",
       date:'',

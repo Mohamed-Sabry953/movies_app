@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Cubit/MovieCubit.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Cubit/States.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
-import 'package:movies_app/MainCategory/MovieHomelayout/Taps/Home/Movepage.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
 import 'package:movies_app/Shared/Network/remote/API_Manger.dart';
@@ -11,122 +13,98 @@ class TopRatedMoviesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: API_Manager.TopRatedMoive(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasError) {
-          return Center(child: Text('something went error'));
-        }
-        var TopRateMove = snapshot.data?.results ?? [];
-        return Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                  AppLocalizations.of(context)!.toprate,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 10,
-                      );
-                    },
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, Movepage.routeName,
-                              arguments: MoviePageModel(
-                                firebaseId: '',
-                                name: TopRateMove[index].name ?? "",
-                                date: TopRateMove[index].firstAirDate ?? "",
-                                votecount:
-                                TopRateMove[index].voteCount ?? 0,
-                                rate: TopRateMove[index].voteAverage ?? 0,
-                                image: TopRateMove[index].posterPath ?? "",
-                                des: TopRateMove[index].overview ?? '',
-                                id: TopRateMove[index].id ?? 0,
-                                fov: false,
-                              ));
-                        },
-                        child: Container(
-                          width: 110,
-                          decoration:
-                          BoxDecoration(color: Color(0xff1A1A1A)),
-                          child: Stack(
-                            children: [
-                              Image.network(
-                                "${Constant.Image}${TopRateMove[index].posterPath}",
-                                filterQuality: FilterQuality.high,
-                                fit: BoxFit.cover,
-                                width: 110,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  MoviePageModel movie = MoviePageModel(
-                                      firebaseId: FirebaseFunction
-                                          .getMovieCollection()
-                                          .doc()
-                                          .id,
-                                      name: TopRateMove[index].name,
-                                      date: TopRateMove[index].firstAirDate,
-                                      votecount:
-                                      TopRateMove[index].voteCount,
-                                      rate: TopRateMove[index].voteAverage,
-                                      image: TopRateMove[index].posterPath,
-                                      des: TopRateMove[index].overview,
-                                      id: TopRateMove[index].id,
-                                      fov: false);
-                                  FirebaseFunction.addMovie(movie);
-                                },
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  child: Stack(
-                                    children: [
-                                      Icon(
-                                        Icons.bookmark_outlined,
-                                        color: Color(0xff514F4F),
-                                        size: 40,
-                                        weight: .5,
-                                      ),
-                                      Center(
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Colors.white,
-                                            size: 15,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+    return BlocProvider(
+        create: (context) => TopRatedMovieCubit()..topRatedMovies(),
+        child: BlocConsumer<TopRatedMovieCubit, MovieHomeLayoutStates>(
+          builder: (context, state) {
+            return Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.toprate,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
                         ),
-                      );
-                    },
-                    itemCount: TopRateMove.length,
-                  ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                            width: 10,
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              MovieHomelayoutCubit.get(context).toMoviePage2(context, index, TopRatedMovieCubit.get(context).TopRatedMovies);
+                            },
+                            child: Container(
+                              width: 110,
+                              decoration: BoxDecoration(color: Color(0xff1A1A1A)),
+                              child: Stack(
+                                children: [
+                                  Image.network(
+                                    "${Constant.Image}${TopRatedMovieCubit.get(context).TopRatedMovies[index].posterPath}",
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.cover,
+                                    width: 110,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                    },
+                                    child: Container(
+                                      width: 40,
+                                      height: 40,
+                                      child: Stack(
+                                        children: [
+                                          Icon(
+                                            Icons.bookmark_outlined,
+                                            color: Color(0xff514F4F),
+                                            size: 40,
+                                            weight: .5,
+                                          ),
+                                          Center(
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                                size: 15,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: TopRatedMovieCubit.get(context).TopRatedMovies.length,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+              ),
+            ) ;
+          },
+          listener: (context, state) {
+            if(state is GetTopRateMovieErrorState){
+              Text('error');
+            }
+            else if(state is GetTopRateMovieSucssesState){
+            }
+            else if(state is MovieHomeLoadingState){
+              CircularProgressIndicator();
+            }
+          },
+        ));
   }
 }

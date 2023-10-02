@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Cubit/MovieCubit.dart';
+import 'package:movies_app/MainCategory/MovieHomelayout/Cubit/States.dart';
 import 'package:movies_app/MainCategory/MovieHomelayout/Models/MoviePageModel.dart';
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:movies_app/Shared/Network/Firebase/FirebaseFunction.dart';
@@ -11,34 +14,16 @@ class PoplurMoviesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: API_Manager.NowPlayingMoive(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container();
-        }
-        if (snapshot.hasError) {
-          return Center(child: Text('something went error'));
-        }
-        var PoplurMovies = snapshot.data?.results ?? [];
-        return Container(
+    return BlocProvider(create: (context) => NowPlayingMovieCubit()..PoplurMoive(),
+    child: BlocConsumer<NowPlayingMovieCubit,MovieHomeLayoutStates>(
+      builder: (context, state) {
+        return NowPlayingMovieCubit.get(context).PoplurMovies.isEmpty?Center(child: CircularProgressIndicator()):Container(
           alignment: AlignmentDirectional.topStart,
           child: CarouselSlider.builder(
             itemBuilder: (context, index, realIndex) {
               return InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, Movepage.routeName,
-                      arguments: MoviePageModel(
-                        firebaseId: '',
-                        name: PoplurMovies[index].originalTitle ?? "",
-                        date: PoplurMovies[index].releaseDate ?? "",
-                        votecount: PoplurMovies[index].voteCount ?? 0,
-                        rate: PoplurMovies[index].voteAverage ?? 0,
-                        image: PoplurMovies[index].posterPath ?? "",
-                        des: PoplurMovies[index].overview ?? '',
-                        id: PoplurMovies[index].id ?? 0,
-                        fov: false,
-                      ));
+                  NowPlayingMovieCubit.get(context).toMoviePage(context, index, NowPlayingMovieCubit.get(context).NowPlayingMoving);
                 },
                 child: Container(
                   padding: EdgeInsetsDirectional.all(5),
@@ -47,7 +32,7 @@ class PoplurMoviesList extends StatelessWidget {
                   height: 250,
                   child: Stack(children: [
                     Image.network(
-                      '${Constant.Image}${PoplurMovies[index].posterPath}',
+                      '${Constant.Image}${NowPlayingMovieCubit.get(context).PoplurMovies[index].posterPath}',
                       fit: BoxFit.fill,
                       width: double.infinity,
                       height: 150,
@@ -62,30 +47,12 @@ class PoplurMoviesList extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Image.network(
-                                  "${Constant.Image}${PoplurMovies[index].posterPath}",
+                                  "${Constant.Image}${NowPlayingMovieCubit.get(context).PoplurMovies[index].posterPath}",
                                   filterQuality: FilterQuality.high,
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    MoviePageModel movie = MoviePageModel(
-                                        firebaseId: FirebaseFunction
-                                            .getMovieCollection()
-                                            .doc()
-                                            .id,
-                                        name: PoplurMovies[index]
-                                            .originalTitle,
-                                        date:
-                                        PoplurMovies[index].releaseDate,
-                                        votecount:
-                                        PoplurMovies[index].voteCount,
-                                        rate:
-                                        PoplurMovies[index].voteAverage,
-                                        image:
-                                        PoplurMovies[index].posterPath,
-                                        des: PoplurMovies[index].overview,
-                                        id: PoplurMovies[index].id,
-                                        fov: false);
-                                    FirebaseFunction.addMovie(movie);
+                                    NowPlayingMovieCubit.get(context).toFirebase(context, index, NowPlayingMovieCubit.get(context).NowPlayingMoving);
                                   },
                                   child: Container(
                                     width: 40,
@@ -120,7 +87,7 @@ class PoplurMoviesList extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  "${PoplurMovies[index].originalTitle}",
+                                  "${NowPlayingMovieCubit.get(context).PoplurMovies[index].originalTitle}",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -130,7 +97,7 @@ class PoplurMoviesList extends StatelessWidget {
                                   height: 5,
                                 ),
                                 Text(
-                                  "${PoplurMovies[index].releaseDate}",
+                                  "${NowPlayingMovieCubit.get(context).PoplurMovies[index].releaseDate}",
                                   style: TextStyle(color: Colors.white70),
                                 ),
                               ],
@@ -164,7 +131,7 @@ class PoplurMoviesList extends StatelessWidget {
                 ),
               );
             },
-            itemCount: PoplurMovies.length,
+            itemCount: NowPlayingMovieCubit.get(context).PoplurMovies.length,
             options: CarouselOptions(
               autoPlayInterval: Duration(seconds: 9),
               viewportFraction: 1,
@@ -175,6 +142,17 @@ class PoplurMoviesList extends StatelessWidget {
           ),
         );
       },
-    );
+      listener: (context, state) {
+        if(state is GetPoplurMoviesMovieErrorState){
+          Text('error');
+        }
+        else if(state is GetPoplurMoviesSucssesState){
+
+        }
+        else if(state is MovieHomeLoadingState){
+          CircularProgressIndicator();
+        }
+      },
+    ),);
   }
 }

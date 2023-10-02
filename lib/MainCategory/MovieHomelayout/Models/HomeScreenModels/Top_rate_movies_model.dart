@@ -10,14 +10,14 @@ class TopRateMoviesModel {
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(TopRatedResults.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
   int? page;
-  List<Results>? results;
+  List<TopRatedResults>? results;
   int? totalPages;
   int? totalResults;
 
@@ -34,8 +34,8 @@ class TopRateMoviesModel {
 
 }
 
-class Results {
-  Results({
+class TopRatedResults {
+  TopRatedResults({
       this.backdropPath, 
       this.firstAirDate, 
       this.genreIds, 
@@ -50,7 +50,7 @@ class Results {
       this.voteAverage, 
       this.voteCount,});
 
-  Results.fromJson(dynamic json) {
+  TopRatedResults.fromJson(dynamic json) {
     backdropPath = json['backdrop_path'];
     firstAirDate = json['first_air_date'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];

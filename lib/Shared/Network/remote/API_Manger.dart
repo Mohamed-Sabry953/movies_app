@@ -17,24 +17,6 @@ import 'package:movies_app/MainCategory/SeriesHomeLayout/Models/SearchScreenMode
 import 'package:movies_app/Shared/Constant/constant.dart';
 import 'package:provider/provider.dart';
 class API_Manager{
-  static Future<TopRateMoviesModel>TopRatedMoive()async{
-    Uri url=Uri.https("api.themoviedb.org","/3/tv/top_rated",{
-      "api_key":Constant.API_KEY
-    });
-    var response=await http.get(url);
-    var jsondata=jsonDecode(response.body);
-    TopRateMoviesModel topRateMoviesModel=TopRateMoviesModel.fromJson(jsondata);
-    return topRateMoviesModel;
-  }
-  static Future<Movies>NowPlayingMoive()async{
-    Uri url=Uri.https("api.themoviedb.org","/3/trending/movie/day",{
-      "api_key":Constant.API_KEY
-    });
-    var response=await http.get(url);
-    var jsondata=jsonDecode(response.body);
-      Movies movies=Movies.fromJson(jsondata);
-    return movies;
-  }
   static Future<PoplurMovies>PoplurMovie()async{
     Uri url=Uri.https("api.themoviedb.org","/3/movie/popular",{
       "api_key":Constant.API_KEY

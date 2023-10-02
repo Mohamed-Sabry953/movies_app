@@ -54,6 +54,7 @@ class FirebaseFunction {
           password:Password ).then((userCredential) {
         Nav();
         UserModel userModel = UserModel(
+          subscribtionDate: DateTime.now().toString(),
             name: Name, phoneNum:PhoneNum , Email: Email,id: userCredential.user!.uid);
         var Collection= getUserCollection();
         var docRef=Collection.doc(userCredential.user!.uid);
@@ -67,21 +68,6 @@ class FirebaseFunction {
       }
     } catch (e) {
       print(e);
-    }
-  }
-  static Future<void>Login(String Email,String Pass,Function Nav) async {
-    try {
-      UserCredential? userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: Email,
-          password:Pass,
-      ).then((value) {
-        Nav();
-      },);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
     }
   }
   static Logout(){
